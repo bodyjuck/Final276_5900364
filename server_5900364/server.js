@@ -22,28 +22,31 @@ io.on("connection",function(socket){
 
 
 
-    
-
     socket.on("Check",function(data){
         
-        
-        
-        if(data.mynum == RandomNum)
+
+        if(data.myNum == RandomNum)
         {
             var result = {text:"Win"}
+
         }
-        else if(data.mynum < RandomNum)
+        else if(data.myNum < RandomNum)
         {
             var result = {text:"Less"}
+
+            
+            socket.broadcast.emit("getResponMess", {myID:data.myID,myNum:data.myNum});
         }
-        else if(data.mynum > RandomNum)
+        else if(data.myNum > RandomNum)
         {
             var result = {text:"Most"}
+
+            
         }
 
-        console.log(result);
+        socket.emit("getResponStatus",result);
         
-        socket.emit("getValue",result);
+        
         
     });
 });
