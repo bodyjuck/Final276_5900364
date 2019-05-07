@@ -34,14 +34,13 @@ io.on("connection",function(socket){
         {
             var result = {text:"Less"}
 
-            
             socket.broadcast.emit("getResponMess", {myID:data.myID,myNum:data.myNum});
         }
         else if(data.myNum > RandomNum)
         {
             var result = {text:"Most"}
 
-            
+            socket.broadcast.emit("getResponMess", {myID:data.myID,myNum:data.myNum});
         }
 
         socket.emit("getResponStatus",result);
