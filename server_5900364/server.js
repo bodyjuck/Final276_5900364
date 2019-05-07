@@ -13,17 +13,20 @@ console.log(RandomNum);
 io.on("connection",function(socket){
 
     var thisPlayerId = shortId.generate();
-    console.log("client connect");
-    socket.emit("open");
+    var player = {id:thisPlayerId}
+    players[thisPlayerId] = player;
+
+    console.log("client connect id = ", player);
+
+    socket.emit("open", player);
+
+
+
+    
 
     socket.on("Check",function(data){
         
         
-
-        //console.log(playerNum);
-        
-        //data = data.mynum;
-        //delete data.mynum;
         
         if(data.mynum == RandomNum)
         {
