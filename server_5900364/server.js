@@ -33,7 +33,7 @@ io.on("connection",function(socket){
 
             socket.emit("getResponStatus",result);
 
-            RandomNum = Math.floor(Math.random() * 100);
+            
         }
         else if(data.myNum < RandomNum)
         {
@@ -55,7 +55,13 @@ io.on("connection",function(socket){
             socket.broadcast.emit("getResponMess", {myID:data.myID,myNum:data.myNum,status:""});
 
         }
+        
+        if(data.myNum == RandomNum)
+        {
+            RandomNum = Math.floor(Math.random() * 100);
 
+            console.log(RandomNum);
+        }
         
         
         
