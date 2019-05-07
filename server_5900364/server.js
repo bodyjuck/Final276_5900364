@@ -27,27 +27,36 @@ io.on("connection",function(socket){
 
         if(data.myNum == RandomNum)
         {
-            var result = {text:"Win"}
+            var result = {myNum:"You Win"}
+            
+            socket.broadcast.emit("getResponMess", {myID:data.myID,myNum:data.myNum,status:"Win"});
 
+            socket.emit("getResponStatus",result);
+
+            RandomNum = Math.floor(Math.random() * 100);
         }
         else if(data.myNum < RandomNum)
         {
-            var result = {text:"Less"}
+            var result = {myNum:"Your num is Less"}
 
-            socket.broadcast.emit("getResponMess", {myID:data.myID,myNum:data.myNum});
-
-            console.log("RandomNum");
+            
         }
         else if(data.myNum > RandomNum)
         {
-            var result = {text:"Most"}
+            var result = {myNum:"Your num is Most"}
 
-            socket.broadcast.emit("getResponMess", {myID:data.myID,myNum:data.myNum});
-
-            console.log("RandomNum");
+            
         }
 
-        socket.emit("getResponStatus",result);
+        if(data.myNum != RandomNum)
+        {
+            socket.emit("getResponStatus",result);
+
+            socket.broadcast.emit("getResponMess", {myID:data.myID,myNum:data.myNum,status:""});
+
+        }
+
+        
         
         
         
